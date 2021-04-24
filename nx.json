@@ -1,27 +1,19 @@
 {
-  "npmScope": "stores",
-  "affected": {
-    "defaultBase": "master"
-  },
   "implicitDependencies": {
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     ".eslintrc.json": "*"
   },
+  "affected": { "defaultBase": "master" },
+  "npmScope": "stores",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
-  "projects": {}
+  "projects": {
+    "react-pg": { "tags": [] },
+    "react-pg-e2e": { "tags": [], "implicitDependencies": ["react-pg"] },
+    "reusable-components": { "tags": [] }
+  }
 }
