@@ -1,14 +1,13 @@
-import React from 'react';
 
 import './header.css';
 
 /* eslint-disable-next-line */
-export interface HeaderProps {}
+export interface HeaderProps { }
 
 export function Header(props: HeaderProps) {
   return (
-    <div>
-      <h1>Welcome to header!</h1>
+    <div className="header">
+      <h1>Welcome to Todo App!</h1>
     </div>
   );
 }

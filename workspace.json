@@ -1,12 +1,23 @@
 {
   "version": 2,
-  "cli": { "defaultCollection": "@nrwl/react" },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
   "defaultProject": "react-pg",
   "generators": {
     "@nrwl/react": {
-      "application": { "style": "css", "linter": "eslint", "babel": true },
-      "component": { "style": "css" },
-      "library": { "style": "css", "linter": "eslint" }
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
     }
   },
   "projects": {
@@ -17,7 +28,9 @@
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/react-pg",
             "index": "apps/react-pg/src/index.html",
@@ -28,7 +41,9 @@
               "apps/react-pg/src/favicon.ico",
               "apps/react-pg/src/assets"
             ],
-            "styles": ["apps/react-pg/src/styles.css"],
+            "styles": [
+              "apps/react-pg/src/styles.css"
+            ],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -59,20 +74,29 @@
         },
         "serve": {
           "executor": "@nrwl/web:dev-server",
-          "options": { "buildTarget": "react-pg:build" },
+          "options": {
+            "buildTarget": "react-pg:build",
+            "proxyConfig": "apps/react-pg/proxy.conf.json"
+          },
           "configurations": {
-            "production": { "buildTarget": "react-pg:build:production" }
+            "production": {
+              "buildTarget": "react-pg:build:production"
+            }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/react-pg/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": [
+              "apps/react-pg/**/*.{ts,tsx,js,jsx}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/react-pg"],
+          "outputs": [
+            "coverage/apps/react-pg"
+          ],
           "options": {
             "jestConfig": "apps/react-pg/jest.config.js",
             "passWithNoTests": true
@@ -93,12 +117,18 @@
             "devServerTarget": "react-pg:serve"
           },
           "configurations": {
-            "production": { "devServerTarget": "react-pg:serve:production" }
+            "production": {
+              "devServerTarget": "react-pg:serve:production"
+            }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/react-pg-e2e/**/*.{js,ts}"] }
+          "options": {
+            "lintFilePatterns": [
+              "apps/react-pg-e2e/**/*.{js,ts}"
+            ]
+          }
         }
       }
     },
@@ -117,9 +147,69 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/reusable-components"],
+          "outputs": [
+            "coverage/libs/reusable-components"
+          ],
           "options": {
             "jestConfig": "libs/reusable-components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pg-server": {
+      "root": "apps/pg-server",
+      "sourceRoot": "apps\\pg-server\\src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/pg-server",
+            "main": "apps/pg-server/src/main.ts",
+            "tsConfig": "apps/pg-server/tsconfig.app.json",
+            "assets": [
+              "apps/pg-server/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/pg-server/src/environments/environment.ts",
+                  "with": "apps/pg-server/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "pg-server:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/pg-server/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/pg-server"
+          ],
+          "options": {
+            "jestConfig": "apps/pg-server/jest.config.js",
             "passWithNoTests": true
           }
         }
